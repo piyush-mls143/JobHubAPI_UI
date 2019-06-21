@@ -1,0 +1,167 @@
+#header {
+    padding: 30px 0;
+    height: 92px;
+    background: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    transition: all 0.5s;
+    z-index: 997;
+  }
+  
+  #header.header-scrolled {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px 0;
+    height: 72px;
+    transition: all 0.5s;
+  }
+  
+  #header #logo {
+    float: left;
+  }
+  
+  #header #logo h1 {
+    font-size: 34px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    letter-spacing: 3px;
+  }
+  
+  #header #logo h1 a,
+  #header #logo h1 a:hover {
+    color: #fff;
+    padding-left: 10px;
+    border-left: 4px solid #18d26e;
+  }
+  
+  #header #logo img {
+    padding: 0;
+    margin: 0;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.content
+{
+	width: 74%;
+    height:auto;
+    margin-top: 10%;
+   margin-left: 13%;  
+   background-color: black;
+   float: left;
+   padding-bottom: 30px;
+   opacity: 0.7;
+   border-radius: 100px;
+}
+.display_details
+{
+  width: 74%;
+  height:auto;
+   margin-left: 13%;  
+   background-color: #dbfcc2;
+   float: left;
+   padding-bottom: 10px;
+   opacity: 0.7;
+   border-radius: 100px;
+}
+
+.display_details .display_name
+{
+  width: 75%;
+   height:auto;
+   float: left;
+   opacity: 0.7;
+   border-radius: 100px;
+   margin-left:5%;
+}
+.display_details .display_date
+{
+  width: 20%;
+   height:auto;
+   float: right;
+   padding-bottom: 10px;
+   opacity: 0.7;
+   border-radius: 100px;
+   font-family: Times New Roman;
+}
+
+.display_details .display_name p
+{
+  margin-left: 1%;
+  margin-right: 10%;
+  font-family: "Impact", Times, serif;
+  font-size: 40px;
+  color: #014934;
+}
+
+.display_details .display_date p
+{
+  margin-left: 5%;
+  margin-right: 10%;
+  font-family: "Impact", Times, serif;
+  font-size: 20px;
+  color: #630801;
+}
+
+
+.content1
+{
+    width: 100%;
+    margin-top:30px;
+    padding-left:25px;
+    padding-right: 25px;
+    overflow:hidden;
+}
+
+
+.icons
+{
+    width: 250px;
+    height: 180px;
+    border-radius: 100px;
+    border:2px solid #cccccc;
+    margin-top: 10px;
+    margin-right:22px;
+    float: left;
+    text-align: center;
+    font-size:25px;
+    font-weight: bold;
+    color:#dbfcc2;
+}
+.icons i
+{
+    font-size: 80px;
+    margin-top: 20px;
+}
+.icons:hover
+{
+    color: #dbd81e;
+}
+.icons i:hover
+{
+    color: #dbd81e;
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <title>Welcome to JobHub</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+	<link href='css/dashboarduser.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/web-fonts-with-css/css/fontawesome-all.min.css">
+
+
+    <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/logomain.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/signup.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+  
+  
+  
+  
+  
+  
+  
+  
+      var tok = localStorage.getItem('token');
+      alert(tok)
+  
+  
+      /// dashboard creation
+      $.ajax({
+        type: 'get',
+        url: 'http://localhost:90/users/me',
+        beforeSend: function (xhr) {
+          if (tok) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+          }
+        },
+        success: function (data) {
+          $('#stage').append('<p> Name: ' + data.name + '</p>' + "<p>Email : " + data.age + "<p/>");
+          //alert(user)
+        },
+        error: function () {
+          alert("Sorry, you are not logged in.");
+        }
+      });
+  
+      // for logging out
+  $("#adds").click(function(e){
+    e.preventDefault();
+  pname=$('#pname').val();
+  type=$('#type').val();
+  price=$('#price').val();
+  sold_to=$('#sold_to').val();
+  data={
+    "pname":pname,
+    "type":type,
+    "price":price,
+    "sold_to":sold_to
+  }
+  console.log(data);
+  
+    $.ajax({
+          type: 'post',
+          url: 'http://localhost:90/addproduct',
+          dataType:'json',
+          data:data,
+          beforeSend: function (xhr) {
+            if (tok) {
+              xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+            }
+          },
+          success: function (data) {
+              alert(data);
+          },
+          error: function (e) {
+           console.log(e);
+          }
+        });
+  
+  })
+      $("#logout").click(function () {
+        $.ajax({
+          type: 'post',
+          url: 'http://localhost:90/users/logout',
+          beforeSend: function (xhr) {
+            if (tok) {
+              xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+            }
+          },
+          success: function (data) {
+            $('#stage').append('<p> Name: ' + data.name + '</p>' + "<p>Email : " + data.age + "<p/>");
+  
+          },
+          error: function () {
+            alert("Sorry, you are not logged in.");
+          }
+        });
+      })
+    });
+
+  
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+<body>
+
+ <!--==========================
+    Header
+  ============================-->
+  <header id="header" >
+    <div class="container-fluid">
+
+      <div id="logo" class="pull-left">
+        <h1><a href="index.html" class="scrollto">JOBHUB</a></h1>
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="index.html">Home</a></li>
+          <li><a href="index.html">About Us</a></li>
+          <li><a href="index.html">Services</a></li>
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+
+
+
+
+
+
+
+
+<div class="content">
+
+  <div class="content1">
+     <a href="addjob.html">
+       <div class="icons"><i class="fas fa-user-plus"></i><p>Add Job</p></div>
+     </a> 
+      <a href="addperformance.php">
+        <div class="icons"><i class="fas fa-clipboard-check"></i><p>List Jobs</p></div>
+      </a>
+          <a href="searchplayer.php">
+        <div class="icons"><i class="fas fa-search"></i><p>Search Job</p></div>
+      </a>
+      <a href="matchschedule.php">
+        <div class="icons"><i class="fas fa-trash-alt"></i><p>Delete Job</p></div>
+      </a>
+       <a href="messageadmin.php">
+        <div class="icons"><i class="far fa-envelope"></i><p>Report</p></div>
+      </a>
+      <a href="noticeuser.php">
+        <div class="icons"><i class="fas fa-bell"></i><p>Notice</p></div>
+      </a>
+      <a href="usersetting.php">
+        <div class="icons"><i class="fas fa-cogs"></i><p>Setting</p></div>
+      </a>
+      <a href="help_user.php">
+        <div class="icons"><i class="fas fa-hands"></i></i><p>Help</p></div>
+      </a>
+       <a href="../model/logout.php">
+        <div class="icons"><i class="fas fa-sign-out-alt"></i><p>SignOut</p></div>
+      </a>
+
+  </div>
+
+</div>
+
+
+
+
+</body>
+</html>
+
