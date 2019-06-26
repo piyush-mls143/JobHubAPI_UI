@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
+  <meta charset="utf-8">
   <title>Welcome to JobHub</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
-	<link href='css/dashboarduser.css' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="css/web-fonts-with-css/css/fontawesome-all.min.css">
 
-
-    <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
+  <!-- Favicons -->
+  
   <link href="img/logomain.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -29,20 +26,6 @@
 
   <!-- Main Stylesheet File -->
   <link href="css/signup.css" rel="stylesheet">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -72,6 +55,7 @@
         },
         success: function (data) {
           $('#display_name').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.email + "<p/>");
+            $('#stagee').append('<input type="hidden" name="userId" id="userId" value=" ' + data._id + ' ">');
           //alert(user)
         },
         error: function () {
@@ -112,6 +96,98 @@
           }
         });
       })
+
+
+
+
+
+      $('#postjob').click(function(){
+
+var post=$("#post").val();
+var companyname=$("#companyname").val();
+var experience=$("#experience").val();
+var description=$("#description").val();
+var userId=$("#userId").val();
+
+data= {
+  'post':post,
+  'companyname':companyname,
+  'experience':experience,
+  'description':description,
+  'userId':userId
+
+}
+console.log(data);
+
+$.ajax({
+  url:'http://localhost:90/addjobs',
+  type: 'post',
+  dataType: 'json',
+  data: data,
+
+  success:function(res, textStatus,xhr){
+    if (res.msg=="Job_added"){
+      alert("Job Added");
+    }
+  },
+
+  error:function(xhr, textStatus, errorThrown){
+    alert(errorThrown);
+  }
+});
+
+})
+
+
+
+
+
+
+
+
+$('#postreport').click(function(){
+
+var reporttitle=$("#reporttitle").val();
+var report=$("#report").val();
+var userId=$("#userId").val();
+
+data= {
+  'reporttitle':reporttitle,
+  'report':report,
+  'userId':userId
+
+}
+console.log(data);
+
+$.ajax({
+  url:'http://localhost:90/addreports',
+  type: 'post',
+  dataType: 'json',
+  data: data,
+
+  success:function(res, textStatus,xhr){
+    if (res.msg=="Report_added"){
+      alert("Reprort Added");
+    }
+  },
+
+  error:function(xhr, textStatus, errorThrown){
+    alert(errorThrown);
+  }
+});
+
+})
+
+
+
+
+
+
+
+
+
+
+
       $("#logout").click(function () {
         $.ajax({
           type: 'post',
@@ -123,6 +199,7 @@
           },
           success: function (data) {
             $('#stage').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.age + "<p/>");
+              
           },
           error: function () {
             alert("Sorry, you are not logged in.");
@@ -134,19 +211,11 @@
   
   
   </script>
+
 </head>
 
-
-
-
-
-
-
-
-
 <body>
-
- <!--==========================
+  <!--==========================
     Header
   ============================-->
   <header id="header" >
@@ -170,49 +239,48 @@
 
 
 
+  <div class="form-part container-fluid">
+	<div class="container">
+    <h2 class="text-center" id="title">Please Report us.</h2>
+    <div id="display_name" >
 
-<div id="display_name" >
 
+      </div>
+		 
+		 <hr>
+		<div class="row">
+			<div class="col-md-5">
+				 
+					<fieldset>							
+            <p class="text-uppercase pull-center">please provide queries, </p>	
+            
+            <div id="stagee">
+            </div>
+						 <div class="form-group">
+							<input type="text" name="reporttitle" id="reporttitle" class="form-control input-lg" placeholder="Report Title" required>
+						</div>
+						
+             <div class="form-group">
+							<textarea rows="4" cols="50" name="report" id="report" class="form-control input-lg" placeholder="Report in brief" required></textarea>
+						</div>
+
+						<div>
+							<input  type="submit" class="btn btn-lg btn-primary"   value="Report" id="postreport">
+				  		</div>	 
+					</fieldset>
+				
+			</div>
+			
+			
+			
+		</div>
+	</div>
 
 </div>
 
-<div class="content">
-
-  <div class="content1">
-     <a href="addjob.html">
-       <div class="icons"><i class="fas fa-user-plus"></i><p>Add Job</p></div>
-     </a> 
-      <a href="addperformance.php">
-        <div class="icons"><i class="fas fa-clipboard-check"></i><p>List Jobs</p></div>
-      </a>
-          <a href="searchplayer.php">
-        <div class="icons"><i class="fas fa-search"></i><p>Search Job</p></div>
-      </a>
-      <a href="deletejob.html">
-        <div class="icons"><i class="fas fa-trash-alt"></i><p>Delete Job</p></div>
-      </a>
-       <a href="report.html">
-        <div class="icons"><i class="far fa-envelope"></i><p>Report</p></div>
-      </a>
-      <a href="noticeuser.php">
-        <div class="icons"><i class="fas fa-bell"></i><p>Notice</p></div>
-      </a>
-      <a href="#">
-        <div class="icons"><i class="fas fa-cogs"></i><p>Setting</p></div>
-      </a>
-      <a href="#">
-        <div class="icons"><i class="fas fa-hands"></i></i><p>Help</p></div>
-      </a>
-       <a href="#">
-        <div class="icons"><i class="fas fa-sign-out-alt"></i><p>SignOut</p></div>
-      </a>
-  </div>
-
-</div>
 
 
 
 
-</body>
-</html>
-
+  </body>
+  </html>

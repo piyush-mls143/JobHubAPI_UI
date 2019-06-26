@@ -27,10 +27,148 @@
   <!-- Main Stylesheet File -->
   <link href="css/signup.css" rel="stylesheet">
 
+
+
+
+
+
+
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var tok = localStorage.getItem('token');
+      alert(tok)
+  
+  
+      /// dashboard creation
+      $.ajax({
+        type: 'get',
+        url: 'http://localhost:90/users/me',
+        beforeSend: function (xhr) {
+          if (tok) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+          }
+        },
+        success: function (data) {
+          $('#display_name').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.email + "<p/>");
+            $('#stagee').append('<input type="hidden" name="userId" id="userId" value=" ' + data._id + ' ">');
+          //alert(user)
+        },
+        error: function () {
+          alert("Sorry, you are not logged in.");
+        }
+      });
+  
+      // for logging out
+      $("#adds").click(function (e) {
+        e.preventDefault();
+        pname = $('#pname').val();
+        type = $('#type').val();
+        price = $('#price').val();
+        sold_to = $('#sold_to').val();
+        data = {
+          "pname": pname,
+          "type": type,
+          "price": price,
+          "sold_to": sold_to
+        }
+        console.log(data);
+  
+        $.ajax({
+          type: 'post',
+          url: 'http://localhost:90/addproduct',
+          dataType: 'json',
+          data: data,
+          beforeSend: function (xhr) {
+            if (tok) {
+              xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+            }
+          },
+          success: function (data) {
+            alert(data);
+          },
+          error: function (e) {
+            console.log(e);
+          }
+        });
+      })
+
+
+
+
+      $('#postjob').click(function(){
+
+        var post=$("#post").val();
+        var companyname=$("#companyname").val();
+        var experience=$("#experience").val();
+        var description=$("#description").val();
+        var userId=$("#userId").val();
+
+        data= {
+          'post':post,
+          'companyname':companyname,
+          'experience':experience,
+          'description':description,
+          'userId':userId
+
+        }
+        console.log(data);
+
+        $.ajax({
+          url:'http://localhost:90/addjobs',
+          type: 'post',
+          dataType: 'json',
+          data: data,
+
+          success:function(res, textStatus,xhr){
+            if (res.msg=="Job_added"){
+              alert("Job Added");
+            }
+          },
+
+          error:function(xhr, textStatus, errorThrown){
+            alert(errorThrown);
+          }
+        });
+        
+      })
+
+
+
+
+
+
+      $("#logout").click(function () {
+        $.ajax({
+          type: 'post',
+          url: 'http://localhost:90/users/logout',
+          beforeSend: function (xhr) {
+            if (tok) {
+              xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+            }
+          },
+          success: function (data) {
+            $('#stage').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.age + "<p/>");
+              
+          },
+          error: function () {
+            alert("Sorry, you are not logged in.");
+          }
+        });
+      })
+  
+    });
+  
+  
+  </script>
+
 </head>
 
 <body>
-
   <!--==========================
     Header
   ============================-->
@@ -55,21 +193,27 @@
 
 
 
-
-
   <div class="form-part container-fluid">
 	<div class="container">
-		<h2 class="text-center" id="title">Please post the job</h2>
+    <h2 class="text-center" id="title">Please post the job</h2>
+    <div id="display_name" >
+
+
+      </div>
 		 
 		 <hr>
 		<div class="row">
 			<div class="col-md-5">
-				 <form role="form" method="post" action="http://localhost:3000/*">
+				 
 					<fieldset>							
-						<p class="text-uppercase pull-center"> Fill the form</p>	
+            <p class="text-uppercase pull-center"> Fill the form</p>	
+            
+            <div id="stagee">
+
+            </div>
 
 						 <div class="form-group">
-							<input type="text" name="jobpost" id="jobpost" class="form-control input-lg" placeholder="Post of the job" required>
+							<input type="text" name="jobpost" id="post" class="form-control input-lg" placeholder="Post of the job" required>
 						</div>
 
 						<div class="form-group">
@@ -82,16 +226,11 @@
 						<div class="form-group">
 							<input type="text" name="description" id="description" class="form-control input-lg" placeholder="Description">
 						</div>
-
-						
-
 						<div>
-							<input  type="submit" class="btn btn-lg btn-primary"   value="Register">
-				  		</div>
-						
-						 
+							<input  type="submit" class="btn btn-lg btn-primary"   value="Post" id="postjob">
+				  		</div>	 
 					</fieldset>
-				</form>
+				
 			</div>
 			
 			
