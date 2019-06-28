@@ -106,6 +106,8 @@
         var companyname=$("#companyname").val();
         var experience=$("#experience").val();
         var description=$("#description").val();
+        var email=$("#email").val();
+        var contact=$("#contact").val();
         var userId=$("#userId").val();
 
         data= {
@@ -113,6 +115,8 @@
           'companyname':companyname,
           'experience':experience,
           'description':description,
+          'email':email,
+          'contact':contact,
           'userId':userId
 
         }
@@ -225,6 +229,12 @@
 						</div>
 						<div class="form-group">
 							<input type="text" name="description" id="description" class="form-control input-lg" placeholder="Description">
+            </div>
+            <div class="form-group">
+							<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email ID">
+            </div>
+            <div class="form-group">
+							<input type="text" name="contact" id="contact" class="form-control input-lg" placeholder="contact number">
 						</div>
 						<div>
 							<input  type="submit" class="btn btn-lg btn-primary"   value="Post" id="postjob">

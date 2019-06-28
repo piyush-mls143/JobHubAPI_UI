@@ -526,7 +526,7 @@ body {
   
 
 
-  #post_col
+  .post_col
   {
       width: 70%;
       height: auto;
@@ -541,6 +541,7 @@ body {
   {
     margin-bottom: 30px;
     background-color:#f2f2f2;
+    margin-bottom: 20px;
     padding: 30px;
 
   }
