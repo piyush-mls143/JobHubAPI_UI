@@ -40,22 +40,21 @@
 
 
   <script>
-    //   $(document).ready(function(){
-    //     $.getJSON('http://localhost:90/getreport', function(res){
+         $(document).ready(function(){
+        $.getJSON('http://localhost:90/getreport', function(res){
   
-    //       $.each(res,function (index){
-    //           $('#displaymessage').append(
-    //             '<div  class="span8 shadow p-3 mb-5 bg-white rounded">'+
-    //             '<h1>'+'<b>'+ res[index].post+' at '+res[index].companyname+'</b>'+'</h1>'+
-    //             '<h3>'+ '<b>'+' Experience required: '+'</b>' +res[index].experience+'</h3>'+
-    //             '<h3>'+ '<b>'+' Email Id: '+'</b>' +res[index].email+'</h3>'+
-    //             '<h3>'+ '<b>'+' Contact number: '+'</b>' +res[index].contact+'</h3>'+
-    //             '<h5>'+'<b>'+ 'Description: '+'</b>'+res[index].description+'</h5>'+
-    //             '<hr>'+'</div>'
-    //           );
-    //       });
-    //     });
-    //   });
+          $.each(res,function (index){
+              $('#displaymessage').append(
+                '<div class="titlediv">'+'<h3>'+ res[index].reporttitle+'</h3>'+'</div>'+
+                '<h5>'+ '<b>'+res[index].report+'</h5>'+
+                '<div>'+
+            '<span class="badge badge-success">'+ res[index].userId+'</span>'+'<div class="pull-right">'+'</div>'+
+        '</div>'+
+                '<hr>'+'</div>'
+              );
+          });
+        });
+      });
     
     </script>
 
@@ -90,19 +89,18 @@
 
   <body>
 
-    <div class="heading container-fluid"><h3>List Messages sent by user</h3></div>
+    <div class="heading container-fluid"><h3>MESSAGES SENT BY USERS</h3></div>
     <div id="displaymessage" class="post_col container-fluid ">
-      <div class="span8 shadow p-3 mb-5 bg-white rounded" >
-        <h1>Civil Enginner At Softtech construction</h1>
-        <h3>Experience Required: 5yrs</h3>
-        <h5>description: 'I am bound to Tahiti for more men.'
+      <!-- <div class="span8 shadow p-3 mb-5 bg-white rounded" >
+        <div class="titlediv"><h3>Civil Enginner At Softtech construction</h3></div>
+        <h5>'I am bound to Tahiti for more men.'
           'Very good. Let me board you a moment—I come in peace.' With that he leaped from the canoe, swam to the boat; and climbing the gunwale, stood face to face with the captain.
           'Cross your arms, sir; throw back your head. Now, repeat after me. As soon as Steelkilt leaves me, I swear to beach this boat on yonder island, and remain there six days. If I do not, may lightning strike me!'A pretty scholar,' laughed the Lakeman. 'Adios, Senor!' and leaping into the sea, he swam back to his comrades.</h5>
         <div>
-            <span class="badge badge-success">Posted by: Piyush Kumar Sah</span><div class="pull-right"></div>
+            <span class="badge badge-success">UserID: Piyush Kumar Sah</span><div class="pull-right"></div>
         </div> 
         <hr>
-    </div>
+    </div> -->
 
     </div>
 
