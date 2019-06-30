@@ -40,6 +40,26 @@
 
 
   <script>
+         $.ajax({
+        type: 'get',
+        url: 'http://localhost:90/users/me',
+        beforeSend: function (xhr) {
+          if (tok) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+          }
+        },
+        success: function (data) {
+          $('#display_name').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.email + "<p/>");
+          //alert(user)
+        },
+        error: function () {
+          alert("Sorry, you are not logged in.");
+        }
+      });
+
+
+
+
       $(document).ready(function(){
 
         $.getJSON('http://localhost:90/get-job', function(res){
