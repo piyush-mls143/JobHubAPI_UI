@@ -147,9 +147,9 @@
 
             localStorage.setItem('token', res.token);
             if (res.usertype == 'admin') {
-              window.location.href = "admin.html"
+              window.location.href = "dashboardadmin.html"
             } else if (res.usertype == 'user') {
-              window.location.href = "user.html"
+              window.location.href = "dashboarduser.html"
             }
           },
           error: function (xhr, textStatus, errorThrown) {

@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
+  <meta charset="utf-8">
   <title>Welcome to JobHub</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
-	<link href='css/dashboarduser.css' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="css/web-fonts-with-css/css/fontawesome-all.min.css">
 
-
-    <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
+  <!-- Favicons -->
+  
   <link href="img/logomain.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -28,12 +25,21 @@
   <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
-  <link href="css/signup.css" rel="stylesheet">
+  <link href="css/profile.css" rel="stylesheet">
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+
+
+
+
+
+
+
+
+
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-
-
   <script>
     $(document).ready(function () {
       var tok = localStorage.getItem('token');
@@ -63,23 +69,70 @@
 
 
 
+
+
+
+
+
+
+
+$('#postnotice').click(function(){
+
+var reporttitle=$("#noticetitle").val();
+var report=$("#notice").val();
+
+data= {
+  'noticetitle':noticetitle,
+  'notice':notice
+
+}
+console.log(data);
+
+$.ajax({
+  url:'http://localhost:90/addnotices',
+  type: 'post',
+  dataType: 'json',
+  data: data,
+
+  success:function(res, textStatus,xhr){
+    if (res.msg=="Notice_added"){
+      alert("Notice Added");
+    }
+  },
+
+  error:function(xhr, textStatus, errorThrown){
+    alert(errorThrown);
+  }
+});
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
       $("#logout").click(function () {
         $.ajax({
           type: 'post',
-          url: 'http://localhost:90/users/logoutAll',
+          url: 'http://localhost:90/users/logout',
           beforeSend: function (xhr) {
             if (tok) {
               xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
             }
           },
           success: function (data) {
-           alert("You are logedout")
-           window.location.href = "login.html"
+            $('#stage').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.age + "<p/>");
               
           },
           error: function () {
             alert("Sorry, you are not logged in.");
-            window.location.href = "login.html"
           }
         });
       })
@@ -89,28 +142,17 @@
   
   </script>
 
-
-
-
-
-  
-
 </head>
 
-
-
-
-
 <body>
-
- <!--==========================
+  <!--==========================
     Header
   ============================-->
   <header id="header" >
     <div class="container-fluid">
 
       <div id="logo" class="pull-left">
-        <h1><a href="index.html" class="scrollto">JOBHUB</a></h1>
+        <h1><a href="dashboarduser.html" class="scrollto">JOBHUB</a></h1>
       </div>
 
       <nav id="nav-menu-container">
@@ -130,32 +172,39 @@
 
 
 
-<div class="content">
 
-  <div class="content1">
-     <a href="addplayer.php">
-       <div class="icons"><i class="fas fa-trash-alt"></i><p>Delete User</p></div>
-     </a> 
-      <a href="deletejob.html">
-        <div class="icons"><i class="fas fa-trash-alt"></i><p>Delete Job</p></div>
-      </a>
-       <a href="viewmessage.html">
-        <div class="icons"><i class="far fa-envelope"></i><p>View message</p></div>
-      </a>
-      <a href="noticeadmin.html">
-        <div class="icons"><i class="fas fa-bell"></i><p>Notice</p></div>
-      </a>
-      <a href="profile.html">
-        <div class="icons"><i class="fas fa-cogs"></i><p>Setting</p></div>
-      </a>
-      <a href="#">
-        <div class="icons" id="logout"><i class="fas fa-sign-out-alt"></i><p>SignOut</p></div>
-      </a>
 
-  </div>
+<div class="img_del">
+     <div class="container">
+             <div class="row">
+                 <div class="img_details">
+                         <img src="profileimages/IMG_20180414_140900256.jpg" class="img-thumbnail img-fluid imgg"  alt="Piyush_image"  />
+                         
+                         <form method="get" action="uploadimage.html">
+                             <button type="submit">Change Image</button>
+                          </form>
+
+
+                         
+                  </div>
+                  <div class="basic_info   shadow-lg p-3 mb-5  rounded" >
+                         <b>Name: </b>Piyush Kumar Sah  <br>
+                         <b>contact: </b>9814302011  <br>
+                         <b>Email: </b>piyush.mls143@gmail.com <br>
+                         <b>username: </b>piyush <br>
+                         <b>password: </b>******** <br>
+                        
+                         <form method="get" action="changepassword.html">
+                            <button type="submit">update password</button>
+                         </form>
+                  </div>                             
+                     
+               
+             </div>
+           </div>
 
 </div>
 
+
 </body>
 </html>
-

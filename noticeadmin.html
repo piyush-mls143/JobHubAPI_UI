@@ -62,87 +62,50 @@
           alert("Sorry, you are not logged in.");
         }
       });
-  
-      // for logging out
-      $("#adds").click(function (e) {
-        e.preventDefault();
-        pname = $('#pname').val();
-        type = $('#type').val();
-        price = $('#price').val();
-        sold_to = $('#sold_to').val();
-        data = {
-          "pname": pname,
-          "type": type,
-          "price": price,
-          "sold_to": sold_to
-        }
-        console.log(data);
-  
-        $.ajax({
-          type: 'post',
-          url: 'http://localhost:90/addproduct',
-          dataType: 'json',
-          data: data,
-          beforeSend: function (xhr) {
-            if (tok) {
-              xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
-            }
-          },
-          success: function (data) {
-            alert(data);
-          },
-          error: function (e) {
-            console.log(e);
-          }
-        });
-      })
 
 
 
 
-      $('#postjob').click(function(){
-
-        var post=$("#post").val();
-        var companyname=$("#companyname").val();
-        var experience=$("#experience").val();
-        var description=$("#description").val();
-        var email=$("#email").val();
-        var contact=$("#contact").val();
-        var userId=$("#userId").val();
-
-        data= {
-          'post':post,
-          'companyname':companyname,
-          'experience':experience,
-          'description':description,
-          'email':email,
-          'contact':contact,
-          'userId':userId
-
-        }
-        console.log(data);
-
-        $.ajax({
-          url:'http://localhost:90/addjobs',
-          type: 'post',
-          dataType: 'json',
-          data: data,
-
-          success:function(res, textStatus,xhr){
-            if (res.msg=="Job_added"){
-              alert("Job Added");
-            }
-          },
-
-          error:function(xhr, textStatus, errorThrown){
-            alert(errorThrown);
-          }
-        });
-        
-      })
 
 
 
+
+
+
+
+
+$('#postnotice').click(function(){
+
+var noticetitle=$("#noticetitle").val();
+var notice=$("#notice").val();
+
+data= {
+  'noticetitle':noticetitle,
+  'notice':notice
+}
+
+console.log(data);
+alert(notice);
+
+$.ajax({
+  url:'http://localhost:90/addnotices',
+  type: 'post',
+  dataType: 'json',
+  data: data,
+
+  success:function(res, textStatus,xhr){
+    if (res.msg=="Notice_added"){
+      alert("Notice Added");
+    }
+  },
+
+  error:function(xhr, textStatus, errorThrown){
+    alert(errorThrown);
+  }
+});
+
+})
+    
 
 
 
