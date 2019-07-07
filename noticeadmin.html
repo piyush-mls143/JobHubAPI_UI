@@ -41,9 +41,9 @@
   <script>
     $(document).ready(function () {
       var tok = localStorage.getItem('token');
-      alert(tok)
-  
-  
+      
+
+
       /// dashboard creation
       $.ajax({
         type: 'get',
@@ -55,11 +55,12 @@
         },
         success: function (data) {
           $('#display_name').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.email + "<p/>");
-            $('#stagee').append('<input type="hidden" name="userId" id="userId" value=" ' + data._id + ' ">');
+          $('#stagee').append('<input type="hidden" name="userId" id="userId" value="' + data._id + '">');
           //alert(user)
         },
         error: function () {
           alert("Sorry, you are not logged in.");
+          window.location.href = "login.html";
         }
       });
 

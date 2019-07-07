@@ -136,6 +136,29 @@
           }
         });
       })
+
+
+      $("#logouticon").click(function () {
+        $.ajax({
+          type: 'post',
+          url: 'http://localhost:90/users/logoutAll',
+          beforeSend: function (xhr) {
+            if (tok) {
+              xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+            }
+          },
+          success: function (data) {
+           alert("You are logedout")
+           window.location.href = "login.html"
+           
+              
+          },
+          error: function () {
+            alert("Sorry, you are not logged in.");
+            window.location.href = "login.html"
+          }
+        });
+      })
   
     });
   
@@ -165,9 +188,9 @@
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="index.html">Home</a></li>
-          <li><a href="index.html">About Us</a></li>
-          <li><a href="index.html">Services</a></li>
+          <li class="menu-active"><a href="dashboarduser.html">Home</a></li>
+          <li><a href="profile.html">Setting</a></li>
+          <li id="logout"><a href="#">SignOut</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -178,10 +201,10 @@
 
 
 
-<div id="display_name" >
+<!-- <div id="display_name" >
 
 
-</div>
+</div> -->
 
 <div class="content">
 
@@ -201,7 +224,7 @@
        <a href="report.html">
         <div class="icons"><i class="far fa-envelope"></i><p>Report</p></div>
       </a>
-      <a href="noticeuser.php">
+      <a href="viewnotice.html">
         <div class="icons"><i class="fas fa-bell"></i><p>Notice</p></div>
       </a>
       <a href="profile.html">
@@ -211,7 +234,7 @@
         <div class="icons"><i class="fas fa-hands"></i></i><p>Help</p></div>
       </a>
        <a href="#">
-        <div class="icons" id="logout"><i class="fas fa-sign-out-alt"></i><p>SignOut</p></div>
+        <div class="icons" id="logouticon"><i class="fas fa-sign-out-alt"></i><p>SignOut</p></div>
       </a>
   </div>
 

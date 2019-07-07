@@ -43,7 +43,6 @@
   <script>
     $(document).ready(function () {
       var tok = localStorage.getItem('token');
-      alert(tok)
   
   
       /// dashboard creation
@@ -73,39 +72,6 @@
 
 
 
-
-
-
-$('#postnotice').click(function(){
-
-var reporttitle=$("#noticetitle").val();
-var report=$("#notice").val();
-
-data= {
-  'noticetitle':noticetitle,
-  'notice':notice
-
-}
-console.log(data);
-
-$.ajax({
-  url:'http://localhost:90/addnotices',
-  type: 'post',
-  dataType: 'json',
-  data: data,
-
-  success:function(res, textStatus,xhr){
-    if (res.msg=="Notice_added"){
-      alert("Notice Added");
-    }
-  },
-
-  error:function(xhr, textStatus, errorThrown){
-    alert(errorThrown);
-  }
-});
-
-})
 
 
 
@@ -156,11 +122,11 @@ $.ajax({
       </div>
 
       <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li class="menu-active"><a href="index.html">Home</a></li>
-          <li><a href="index.html">About Us</a></li>
-          <li><a href="index.html">Services</a></li>
-        </ul>
+          <ul class="nav-menu">
+              <li class="menu-active"><a href="dashboarduser.html">Home</a></li>
+              <li><a href="profile.html">Setting</a></li>
+              <li id="logout"><a href="#">SignOut</a></li>
+            </ul>
       </nav><!-- #nav-menu-container -->
     </div>
   </header><!-- #header -->
@@ -179,25 +145,21 @@ $.ajax({
              <div class="row">
                  <div class="img_details">
                          <img src="profileimages/IMG_20180414_140900256.jpg" class="img-thumbnail img-fluid imgg"  alt="Piyush_image"  />
-                         
-                         <form method="get" action="uploadimage.html">
-                             <button type="submit">Change Image</button>
-                          </form>
-
-
+                  
                          
                   </div>
-                  <div class="basic_info   shadow-lg p-3 mb-5  rounded" >
+                  <div id="basic info" class="basic_info   shadow-lg p-3 mb-5  rounded" >
                          <b>Name: </b>Piyush Kumar Sah  <br>
                          <b>contact: </b>9814302011  <br>
                          <b>Email: </b>piyush.mls143@gmail.com <br>
                          <b>username: </b>piyush <br>
                          <b>password: </b>******** <br>
                         
-                         <form method="get" action="changepassword.html">
-                            <button type="submit">update password</button>
-                         </form>
-                  </div>                             
+                         
+                  </div>   
+                  <form method="get" action="changepassword.html">
+                      <button type="submit">update password</button>
+                   </form>                          
                      
                
              </div>

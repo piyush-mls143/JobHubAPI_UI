@@ -26,7 +26,7 @@
   <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
-  <link href="css/viewjobs.css" rel="stylesheet">
+  <link href="css/deletejob.css" rel="stylesheet">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
@@ -42,9 +42,10 @@
   <script>
       $(document).ready(function(){
 
-
-
         var tok = localStorage.getItem('token');
+      
+
+
       /// dashboard creation
       $.ajax({
         type: 'get',
@@ -55,8 +56,8 @@
           }
         },
         success: function (data) {
-          // $('#display_name').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.email + "<p/>");
-          // $('#stagee').append('<input type="hidden" name="userId" id="userId" value="' + data._id + '">');
+          $('#display_name').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.email + "<p/>");
+          $('#stagee').append('<input type="hidden" name="userId" id="userId" value="' + data._id + '">');
           //alert(user)
         },
         error: function () {
@@ -66,32 +67,35 @@
       });
 
 
+      // $.ajax({
+      //     url: 'http://localhost:90/get-job_id' + id,
+      //     type: 'GET',
+      //     dataType: 'json',
+      //     data: id,
 
-        $("#logout").click(function () {
-        $.ajax({
-          type: 'post',
-          url: 'http://localhost:90/users/logout',
-          beforeSend: function (xhr) {
-            if (tok) {
-              xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
-            }
-          },
-          success: function (data) {
-            $('#stage').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.age + "<p/>");
 
-          },
-          error: function () {
-            alert("Sorry, you are not logged in.");
-            window.location.href = "login.html"
+      //     beforeSend: function (xhr) {
+      //     if (tok) {
+      //       xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+      //     }
+      //   },
+
+
+
+      // })
+
+
+
+      $.ajax({
+          type:'GET',
+          url:'http://localhost:90/get-job',
+           beforeSend: function (xhr) {
+          if (tok) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
           }
-        });
-      })
-
-
-
-
-        $.getJSON('http://localhost:90/get-job', function(res){
-  
+        },
+        success: function(res){
+           
           $.each(res,function (index){
               $('#displayjobs').append(
                 '<div  class="span8 shadow p-3 mb-5 bg-white rounded">'+
@@ -100,34 +104,76 @@
                 '<h3>'+ '<b>'+' Email Id: '+'</b>' +res[index].email+'</h3>'+
                 '<h3>'+ '<b>'+' Contact number: '+'</b>' +res[index].contact+'</h3>'+
                 '<h5>'+'<b>'+ 'Description: '+'</b>'+res[index].description+'</h5>'+
-                '<hr>'+'</div>'
+                '<hr>'+
+
+                '<div>'+
+            
+            '<button type="button" id="deletejob" value="' + res[index]._id + '">Delete</button>'
+        +'</div> '+'</div>'
+        +'<hr>'
+                
               );
           });
+          },
+          error:function(xhr, textStatus,errorThrown) {
+            console.log('Error in Operation');
+          }
+        });
+
+
+
+
+        // $.getJSON('http://localhost:90/get-job_id', function(res){
+  
+        //   $.each(res,function (index){
+        //       $('#displayjobs').append(
+        //         '<div  class="span8 shadow p-3 mb-5 bg-white rounded">'+
+        //         '<h1>'+'<b>'+ res[index].post+' at '+res[index].companyname+'</b>'+'</h1>'+
+        //         '<h3>'+ '<b>'+' Experience required: '+'</b>' +res[index].experience+'</h3>'+
+        //         '<h3>'+ '<b>'+' Email Id: '+'</b>' +res[index].email+'</h3>'+
+        //         '<h3>'+ '<b>'+' Contact number: '+'</b>' +res[index].contact+'</h3>'+
+        //         '<h5>'+'<b>'+ 'Description: '+'</b>'+res[index].description+'</h5>'+
+        //         '<hr>'+
+
+        //         '<div>'+
+            
+        //     '<button type="button" id="deletejob" value="' + res[index]._id + '">Delete</button>'
+        // +'</div> '+'</div>'
+        // +'<hr>'
+                
+        //       );
+        //   });
+        // });
+
+        $('#displayjobs').on('click','#deletejob', function(){
+        id = $(this).val();
+        $.ajax({
+          url: 'http://localhost:90/delete_jobs/' + id,
+          type: 'DELETE',
+          dataType: 'json',
+          data: id,
+
+
+        //   beforeSend: function (xhr) {
+        //   if (tok) {
+        //     xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+        //   }
+        // },
+          success: function(data, textStatus, xhr){
+            location.reload();
+            if (res.msg=="Jobs_deleted"){
+              alert("Jobs deleted");
+              window.location.href = "deletejob.html"
+              
+            }
+          },
+          error:function(xhr, textStatus,errorThrown) {
+            console.log('Error in Operation');
+          }
         });
       });
 
-
-      $.ajax({
-        type: 'get',
-        url: 'http://localhost:90/users/me',
-        beforeSend: function (xhr) {
-          if (tok) {
-            xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
-          }
-        },
-        success: function (data) {
-          $('#display_name').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.email + "<p/>");
-            $('#stagee').append('<input type="hidden" name="userId" id="userId" value=" ' + data._id + ' ">');
-          //alert(user)
-        },
-        
-        error: function () {
-          alert("Sorry, you are not logged in.");
-          window.location.href = "login.html";
-        }
       });
-  
-    
     </script>
 
 </head>
@@ -145,11 +191,11 @@
       </div>
 
       <nav id="nav-menu-container">
-          <ul class="nav-menu">
-              <li class="menu-active"><a href="dashboarduser.html">Home</a></li>
-              <li><a href="profile.html">Setting</a></li>
-              <li id="logout"><a href="#">SignOut</a></li>
-            </ul>
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="index.html">Home</a></li>
+          <li><a href="index.html">About Us</a></li>
+          <li><a href="index.html">Services</a></li>
+        </ul>
       </nav><!-- #nav-menu-container -->
     </div>
   </header><!-- #header -->
@@ -160,7 +206,10 @@
 
 
   <body>
+    <div class="caption">DELETE THE JOB YOU POSTED </div>
     <div id="displayjobs" class="post_col container-fluid ">
+
+        
       <!-- <div class="span8 shadow p-3 mb-5 bg-white rounded" >
         <h1>Civil Enginner At Softtech construction</h1>
         <h3>Experience Required: 5yrs</h3>
@@ -168,18 +217,13 @@
           'Very good. Let me board you a moment—I come in peace.' With that he leaped from the canoe, swam to the boat; and climbing the gunwale, stood face to face with the captain.
           'Cross your arms, sir; throw back your head. Now, repeat after me. As soon as Steelkilt leaves me, I swear to beach this boat on yonder island, and remain there six days. If I do not, may lightning strike me!'A pretty scholar,' laughed the Lakeman. 'Adios, Senor!' and leaping into the sea, he swam back to his comrades.</h5>
         <div>
-            <span class="badge badge-success">Posted by: Piyush Kumar Sah</span><div class="pull-right"></div>
+            
+            <span class="badge badge-success"><input  type="submit" class="btn btn-lg btn-primary"   value="delete" id="deletejob"></span><div class="pull-right"></div>
         </div> 
         <hr>
     </div> -->
 
     </div>
-
-
-
-
-
-
 
 
   </body>

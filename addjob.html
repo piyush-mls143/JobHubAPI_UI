@@ -43,7 +43,7 @@
   <script>
     $(document).ready(function () {
       var tok = localStorage.getItem('token');
-      alert(tok)
+      
 
 
       /// dashboard creation
@@ -67,38 +67,7 @@
       });
 
       // for logging out
-      $("#adds").click(function (e) {
-        e.preventDefault();
-        pname = $('#pname').val();
-        type = $('#type').val();
-        price = $('#price').val();
-        sold_to = $('#sold_to').val();
-        data = {
-          "pname": pname,
-          "type": type,
-          "price": price,
-          "sold_to": sold_to
-        }
-        console.log(data);
-
-        $.ajax({
-          type: 'post',
-          url: 'http://localhost:90/addproduct',
-          dataType: 'json',
-          data: data,
-          beforeSend: function (xhr) {
-            if (tok) {
-              xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
-            }
-          },
-          success: function (data) {
-            alert(data);
-          },
-          error: function (e) {
-            console.log(e);
-          }
-        });
-      })
+     
 
 
 
@@ -189,11 +158,11 @@
       </div>
 
       <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li class="menu-active"><a href="index.html">Home</a></li>
-          <li><a href="index.html">About Us</a></li>
-          <li><a href="index.html">Services</a></li>
-        </ul>
+          <ul class="nav-menu">
+              <li class="menu-active"><a href="dashboarduser.html">Home</a></li>
+              <li><a href="profile.html">Setting</a></li>
+              <li id="logout"><a href="#">SignOut</a></li>
+            </ul>
       </nav><!-- #nav-menu-container -->
     </div>
   </header><!-- #header -->
@@ -205,10 +174,10 @@
   <div class="form-part container-fluid">
     <div class="container">
       <h2 class="text-center" id="title">Please post the job</h2>
-      <div id="display_name">
+      <!-- <div id="display_name">
 
 
-      </div>
+      </div> -->
 
       <hr>
       <div class="row">

@@ -673,6 +673,16 @@ body {
                 float: left;
                 margin-left: 2%;
             }
+
+            form
+            {
+               float: LEFT;
+                background-color:#eff2f7;
+                width:75%;
+                margin-left: 2%;
+                padding: 1%;
+
+            }
   
   
   
