@@ -56,6 +56,28 @@
           });
         });
       });
+
+
+      $.ajax({
+        type: 'get',
+        url: 'http://localhost:90/users/me',
+        beforeSend: function (xhr) {
+          if (tok) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+          }
+        },
+        success: function (data) {
+          $('#display_name').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.email + "<p/>");
+            $('#stagee').append('<input type="hidden" name="userId" id="userId" value=" ' + data._id + ' ">');
+          //alert(user)
+        },
+        
+        error: function () {
+          alert("Sorry, you are not logged in.");
+          window.location.href = "login.html";
+        }
+      });
+  
     
     </script>
 
@@ -70,7 +92,7 @@
     <div class="container-fluid">
 
       <div id="logo" class="pull-left">
-        <h1><a href="index.html" class="scrollto">JOBHUB</a></h1>
+        <h1><a href="dashboarduser.html" class="scrollto">JOBHUB</a></h1>
       </div>
 
       <nav id="nav-menu-container">

@@ -76,6 +76,7 @@
         },
         error: function () {
           alert("Sorry, you are not logged in.");
+          window.location.href = "login.html"
         }
       });
   
@@ -126,6 +127,7 @@
           success: function (data) {
            alert("You are logedout")
            window.location.href = "login.html"
+           
               
           },
           error: function () {

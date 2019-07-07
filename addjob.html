@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Welcome to JobHub</title>
@@ -8,11 +9,12 @@
   <meta content="" name="description">
 
   <!-- Favicons -->
-  
+
   <link href="img/logomain.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+    rel="stylesheet">
 
   <!-- Bootstrap CSS File -->
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,8 +44,8 @@
     $(document).ready(function () {
       var tok = localStorage.getItem('token');
       alert(tok)
-  
-  
+
+
       /// dashboard creation
       $.ajax({
         type: 'get',
@@ -55,14 +57,15 @@
         },
         success: function (data) {
           $('#display_name').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.email + "<p/>");
-            $('#stagee').append('<input type="hidden" name="userId" id="userId" value=" ' + data._id + ' ">');
+          $('#stagee').append('<input type="hidden" name="userId" id="userId" value="' + data._id + '">');
           //alert(user)
         },
         error: function () {
           alert("Sorry, you are not logged in.");
+          window.location.href = "login.html";
         }
       });
-  
+
       // for logging out
       $("#adds").click(function (e) {
         e.preventDefault();
@@ -77,7 +80,7 @@
           "sold_to": sold_to
         }
         console.log(data);
-  
+
         $.ajax({
           type: 'post',
           url: 'http://localhost:90/addproduct',
@@ -100,45 +103,46 @@
 
 
 
-      $('#postjob').click(function(){
+      $('#postjob').click(function () {
 
-        var post=$("#post").val();
-        var companyname=$("#companyname").val();
-        var experience=$("#experience").val();
-        var description=$("#description").val();
-        var email=$("#email").val();
-        var contact=$("#contact").val();
-        var userId=$("#userId").val();
+        var post = $("#post").val();
+        var companyname = $("#companyname").val();
+        var experience = $("#experience").val();
+        var description = $("#description").val();
+        var email = $("#email").val();
+        var contact = $("#contact").val();
+        var userId = $("#userId").val();
 
-        data= {
-          'post':post,
-          'companyname':companyname,
-          'experience':experience,
-          'description':description,
-          'email':email,
-          'contact':contact,
-          'userId':userId
+        data = {
+          'post': post,
+          'companyname': companyname,
+          'experience': experience,
+          'description': description,
+          'email': email,
+          'contact': contact,
+          'userId': userId
 
         }
         console.log(data);
 
         $.ajax({
-          url:'http://localhost:90/addjobs',
+          url: 'http://localhost:90/addjobs',
           type: 'post',
           dataType: 'json',
           data: data,
 
-          success:function(res, textStatus,xhr){
-            if (res.msg=="Job_added"){
+          success: function (res, textStatus, xhr) {
+            if (res.msg == "Job_added") {
               alert("Job Added");
+              window.location.href = "addjob.html"
             }
           },
 
-          error:function(xhr, textStatus, errorThrown){
+          error: function (xhr, textStatus, errorThrown) {
             alert(errorThrown);
           }
         });
-        
+
       })
 
 
@@ -157,17 +161,18 @@
           },
           success: function (data) {
             $('#stage').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.age + "<p/>");
-              
+
           },
           error: function () {
             alert("Sorry, you are not logged in.");
+            window.location.href = "login.html"
           }
         });
       })
-  
+
     });
-  
-  
+
+
   </script>
 
 </head>
@@ -176,11 +181,11 @@
   <!--==========================
     Header
   ============================-->
-  <header id="header" >
+  <header id="header">
     <div class="container-fluid">
 
       <div id="logo" class="pull-left">
-        <h1><a href="index.html" class="scrollto">JOBHUB</a></h1>
+        <h1><a href="dashboarduser.html" class="scrollto">JOBHUB</a></h1>
       </div>
 
       <nav id="nav-menu-container">
@@ -198,61 +203,66 @@
 
 
   <div class="form-part container-fluid">
-	<div class="container">
-    <h2 class="text-center" id="title">Please post the job</h2>
-    <div id="display_name" >
+    <div class="container">
+      <h2 class="text-center" id="title">Please post the job</h2>
+      <div id="display_name">
 
 
       </div>
-		 
-		 <hr>
-		<div class="row">
-			<div class="col-md-5">
-				 
-					<fieldset>							
-            <p class="text-uppercase pull-center"> Fill the form</p>	
-            
+
+      <hr>
+      <div class="row">
+        <div class="col-md-5">
+
+          <fieldset>
+            <p class="text-uppercase pull-center"> Fill the form</p>
+
             <div id="stagee">
 
             </div>
 
-						 <div class="form-group">
-							<input type="text" name="jobpost" id="post" class="form-control input-lg" placeholder="Post of the job" required>
-						</div>
+            <div class="form-group">
+              <input type="text" name="jobpost" id="post" class="form-control input-lg" placeholder="Post of the job"
+                required>
+            </div>
 
-						<div class="form-group">
-							<input type="text" name="companyname" id="companyname" class="form-control input-lg" placeholder="Company Name" required>
-						</div>
+            <div class="form-group">
+              <input type="text" name="companyname" id="companyname" class="form-control input-lg"
+                placeholder="Company Name" required>
+            </div>
 
-						<div class="form-group">
-							<input type="text" name="experience" id="experience" class="form-control input-lg" placeholder="Experience Required" required>
-						</div>
-						<div class="form-group">
-							<input type="text" name="description" id="description" class="form-control input-lg" placeholder="Description">
+            <div class="form-group">
+              <input type="text" name="experience" id="experience" class="form-control input-lg"
+                placeholder="Experience Required" required>
             </div>
             <div class="form-group">
-							<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email ID">
+              <input type="text" name="description" id="description" class="form-control input-lg"
+                placeholder="Description">
             </div>
             <div class="form-group">
-							<input type="text" name="contact" id="contact" class="form-control input-lg" placeholder="contact number">
-						</div>
-						<div>
-							<input  type="submit" class="btn btn-lg btn-primary"   value="Post" id="postjob">
-				  		</div>	 
-					</fieldset>
-				
-			</div>
-			
-			
-			
-		</div>
-	</div>
+              <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email ID">
+            </div>
+            <div class="form-group">
+              <input type="text" name="contact" id="contact" class="form-control input-lg" placeholder="contact number">
+            </div>
+            <div>
+              <input type="submit" class="btn btn-lg btn-primary" value="Post" id="postjob">
+            </div>
+          </fieldset>
 
-</div>
+        </div>
 
 
 
+      </div>
+    </div>
+
+  </div>
 
 
-  </body>
-  </html>
+
+
+
+</body>
+
+</html>
