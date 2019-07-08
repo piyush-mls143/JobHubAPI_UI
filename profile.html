@@ -55,9 +55,12 @@
           }
         },
         success: function (data) {
-          $('#display_name').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.email + "<p/>");
-            $('#stagee').append('<input type="hidden" name="userId" id="userId" value=" ' + data._id + ' ">');
-          //alert(user)
+         console.log(data)
+         $("#proimg").attr("src","http://localhost:90/"+data.imageName)
+         $("#name").text(data.firstname);
+         $("#contact").text(data.contact);
+         $("#email").text(data.email);
+         $("#username").text(data.username);
         },
         error: function () {
           alert("Sorry, you are not logged in.");
@@ -144,15 +147,15 @@
      <div class="container">
              <div class="row">
                  <div class="img_details">
-                         <img src="profileimages/IMG_20180414_140900256.jpg" class="img-thumbnail img-fluid imgg"  alt="Piyush_image"  />
+                         <img id="proimg" src="profileimages/IMG_20180414_140900256.jpg" class="img-thumbnail img-fluid imgg"  alt="Piyush_image"  />
                   
                          
                   </div>
                   <div id="basic info" class="basic_info   shadow-lg p-3 mb-5  rounded" >
-                         <b>Name: </b>Piyush Kumar Sah  <br>
-                         <b>contact: </b>9814302011  <br>
-                         <b>Email: </b>piyush.mls143@gmail.com <br>
-                         <b>username: </b>piyush <br>
+                         Name: <b id="name"></b> <br>
+                         contact: <b id="contact"> </b>  <br>
+                         Email: <b id="email"></b> <br>
+                         username: <b id="username"> </b> <br>
                          <b>password: </b>******** <br>
                         
                          

@@ -40,7 +40,14 @@
 
 
   <script>
-         $.ajax({
+      $(document).ready(function(){
+
+        var tok = localStorage.getItem('token');
+      
+
+
+      /// dashboard creation
+      $.ajax({
         type: 'get',
         url: 'http://localhost:90/users/me',
         beforeSend: function (xhr) {
@@ -50,51 +57,113 @@
         },
         success: function (data) {
           $('#display_name').append('<p> Name: ' + data.firstname + '</p>' + "<p>Email : " + data.email + "<p/>");
+          $('#stagee').append('<input type="hidden" name="userId" id="userId" value="' + data._id + '">');
           //alert(user)
         },
         error: function () {
           alert("Sorry, you are not logged in.");
+          window.location.href = "login.html";
         }
       });
 
 
+      // $.ajax({
+      //     url: 'http://localhost:90/get-job_id' + id,
+      //     type: 'GET',
+      //     dataType: 'json',
+      //     data: id,
 
 
-      $(document).ready(function(){
+      //     beforeSend: function (xhr) {
+      //     if (tok) {
+      //       xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+      //     }
+      //   },
 
-        $.getJSON('http://localhost:90/get-job', function(res){
-  
+
+
+      // })
+
+
+
+      $.ajax({
+          type:'GET',
+          url:'http://localhost:90/get_users',
+           beforeSend: function (xhr) {
+          if (tok) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+          }
+        },
+        success: function(res){
+           
           $.each(res,function (index){
               $('#displayjobs').append(
                 '<div  class="span8 shadow p-3 mb-5 bg-white rounded">'+
-                '<h1>'+'<b>'+ res[index].post+' at '+res[index].companyname+'</b>'+'</h1>'+
-                '<h3>'+ '<b>'+' Experience required: '+'</b>' +res[index].experience+'</h3>'+
-                '<h3>'+ '<b>'+' Email Id: '+'</b>' +res[index].email+'</h3>'+
+                '<h1>'+'<b>'+'Full Name: '+ res[index].firstname+' '+res[index].lastname+'</b>'+'</h1>'+
+                '<h3>'+ '<b>'+' Email: '+'</b>' +res[index].email+'</h3>'+
                 '<h3>'+ '<b>'+' Contact number: '+'</b>' +res[index].contact+'</h3>'+
-                '<h5>'+'<b>'+ 'Description: '+'</b>'+res[index].description+'</h5>'+
+                '<h3>'+ '<b>'+' Uusername: '+'</b>' +res[index].username+'</h3>'+
+                '<h5>'+'<b>'+ 'User Id: '+'</b>'+res[index]._id+'</h5>'+
                 '<hr>'+
 
                 '<div>'+
             
-            '<button type="button" id="deletejob" value="' + res[index]._id + '">Delete</button>'
+            '<button type="button" id="deleteuser" value="' + res[index]._id + '">Delete</button>'
         +'</div> '+'</div>'
         +'<hr>'
                 
               );
           });
+          },
+          error:function(xhr, textStatus,errorThrown) {
+            console.log('Error in Operation');
+          }
         });
 
-        $('#displayjobs').on('click','#deletejob', function(){
+
+
+
+        // $.getJSON('http://localhost:90/get-job_id', function(res){
+  
+        //   $.each(res,function (index){
+        //       $('#displayjobs').append(
+        //         '<div  class="span8 shadow p-3 mb-5 bg-white rounded">'+
+        //         '<h1>'+'<b>'+ res[index].post+' at '+res[index].companyname+'</b>'+'</h1>'+
+        //         '<h3>'+ '<b>'+' Experience required: '+'</b>' +res[index].experience+'</h3>'+
+        //         '<h3>'+ '<b>'+' Email Id: '+'</b>' +res[index].email+'</h3>'+
+        //         '<h3>'+ '<b>'+' Contact number: '+'</b>' +res[index].contact+'</h3>'+
+        //         '<h5>'+'<b>'+ 'Description: '+'</b>'+res[index].description+'</h5>'+
+        //         '<hr>'+
+
+        //         '<div>'+
+            
+        //     '<button type="button" id="deletejob" value="' + res[index]._id + '">Delete</button>'
+        // +'</div> '+'</div>'
+        // +'<hr>'
+                
+        //       );
+        //   });
+        // });
+
+        $('#displayjobs').on('click','#deleteuser', function(){
         id = $(this).val();
         $.ajax({
-          url: 'http://localhost:90/delete_jobs/' + id,
+          url: 'http://localhost:90/delete_user/' + id,
           type: 'DELETE',
           dataType: 'json',
           data: id,
+
+
+        //   beforeSend: function (xhr) {
+        //   if (tok) {
+        //     xhr.setRequestHeader('Authorization', 'Bearer ' + tok);
+        //   }
+        // },
           success: function(data, textStatus, xhr){
             location.reload();
             if (res.msg=="Jobs_deleted"){
               alert("Jobs deleted");
+              window.location.href = "deletejob.html"
               
             }
           },
@@ -118,7 +187,7 @@
     <div class="container-fluid">
 
       <div id="logo" class="pull-left">
-        <h1><a href="index.html" class="scrollto">JOBHUB</a></h1>
+        <h1><a href="dashboarduser.html" class="scrollto">JOBHUB</a></h1>
       </div>
 
       <nav id="nav-menu-container">
@@ -131,14 +200,13 @@
     </div>
   </header><!-- #header -->
 
-  
-
 
 
 
 
 
   <body>
+    <div class="caption">DELETE USERS </div>
     <div id="displayjobs" class="post_col container-fluid ">
 
         
