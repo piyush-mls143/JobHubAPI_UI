@@ -46,7 +46,7 @@
 
         username = $("#username").val();
         password = $("#password").val();
-        alert(password)
+        // alert(password)
         data = {
           "username": username,
           "password": password
@@ -59,7 +59,7 @@
           dataType: 'json',
           data: data,
           success: function (res, textStatus, xhr) {
-            alert(res.token);
+            // alert(res.token);
             localStorage.setItem('token', res.token);
           },
           error: function (xhr, textStatus, errorThrown) {
@@ -130,7 +130,7 @@
 
         username = $("#username").val();
         password = $("#password").val();
-        alert(password)
+        alert("successfully login")
         data = {
           "username": username,
           "password": password
